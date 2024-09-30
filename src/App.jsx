@@ -48,18 +48,20 @@ function App() {
   const [bet,setBet] = useState(false);
   const [cashout,setCashout] = useState(false);
   return (
-    <div className="App flex p-6 space-x-8 bg-gray-900 min-h-screen">
+    <div className="App flex pt-6 space-x-8 bg-pink-900 min-h-screen">
       
-    <div className='flex flex-col space-y-4'>
+    <div className=' flex flex-col space-y-4'>
       <ConnectionProvider endpoint={"https://solana-devnet.g.alchemy.com/v2/VDnQvpyFzMy5QhBaE3WzKup4fib-Qibl"}>
       <WalletProvider wallets={[]} autoConnect>
         <WalletModalProvider> 
         <div>
           <WalletMultiButton />
           <WalletDisconnectButton />
-        <AirDrop score={score} bet={bet} setCashout={setCashout} cashout={cashout}/>
+        <AirDrop score={score} setCashout={setCashout} cashout={cashout} bet={bet} setBet={setBet}/>
+        <div>
         <SendTokens bet={bet} setBet={setBet}/>
         <ShowuserBalance />
+        </div>
       </div>
       </WalletModalProvider>
       </WalletProvider>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Trophy } from 'lucide-react';
 const ROWS = 8;
 const COLS = 4;
 const ACTIVE_ROWS = 4;
@@ -17,7 +17,7 @@ const DragonEggGame = ({score,setScore,bet,setBet,cashout}) => {
   }, []);
 
   useEffect(() => {
-    if (cashout) {
+    if (!bet) {
       initializeBoard();
     }
   }, [cashout]);
@@ -63,8 +63,13 @@ const DragonEggGame = ({score,setScore,bet,setBet,cashout}) => {
 
   
   return (
-    <div className="flex flex-col items-center bg-gray-800 p-4 rounded-lg">
-      <div className="mb-4 text-white">Score: {score}</div>
+    <div className=" flex flex-col items-center bg-gray-800 p-4 rounded-lg">
+
+<div className="mb-6 text-3xl font-bold text-yellow-400 flex items-center">
+        <Trophy className="mr-2" />
+        Score: {score}
+      </div>
+
       <div className="grid gap-2">
         {board.map((row, rowIndex) => (
           <div key={rowIndex} className="flex gap-2">
