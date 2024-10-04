@@ -48,7 +48,7 @@ function App() {
   const [bet,setBet] = useState(false);
   const [cashout,setCashout] = useState(false);
   return (
-    <div className="App flex pt-6 space-x-8 bg-pink-900 min-h-screen">
+    <div className="App flex pt-6  space-x-8 bg-blue-900 min-h-screen">
       
     <div className=' flex flex-col space-y-4'>
       <ConnectionProvider endpoint={"https://solana-devnet.g.alchemy.com/v2/VDnQvpyFzMy5QhBaE3WzKup4fib-Qibl"}>
