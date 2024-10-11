@@ -4,7 +4,7 @@ const ROWS = 8;
 const COLS = 4;
 const ACTIVE_ROWS = 4;
 
-const DragonEggGame = ({score,setScore,bet,setBet,cashout}) => {
+const DragonEggGame = ({score,setScore,bet,setBet,cashout,setCashout}) => {
   const [board, setBoard] = useState([]);
   const [activeRow, setActiveRow] = useState(ROWS - 1);
   const [gameOver, setGameOver] = useState(false);
@@ -17,8 +17,15 @@ const DragonEggGame = ({score,setScore,bet,setBet,cashout}) => {
   }, []);
 
   useEffect(() => {
-    if (!bet) {
+    if (bet) {
       initializeBoard();
+    }
+  }, [bet]);
+
+  useEffect(() => {
+    if (cashout) {
+      initializeBoard();
+      setCashout(false); // Reset cashout after re-initializing
     }
   }, [cashout]);
 

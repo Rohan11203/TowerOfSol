@@ -42,6 +42,7 @@ import { Buffer } from 'buffer';
 
 import { useState } from 'react';
 import DragonEggGame from './DragonGame';
+import FullWallet from './FullWallet';
 
 function App() {
   const [score,setScore] = useState(0);
@@ -50,26 +51,11 @@ function App() {
   return (
     <div className="App flex pt-6  space-x-8 bg-blue-900 min-h-screen">
       
-    <div className=' flex flex-col space-y-4'>
-      <ConnectionProvider endpoint={"https://solana-devnet.g.alchemy.com/v2/VDnQvpyFzMy5QhBaE3WzKup4fib-Qibl"}>
-      <WalletProvider wallets={[]} autoConnect>
-        <WalletModalProvider> 
-        <div>
-          <WalletMultiButton />
-          <WalletDisconnectButton />
-        <AirDrop score={score} setCashout={setCashout} cashout={cashout} bet={bet} setBet={setBet}/>
-        <div>
-        <SendTokens bet={bet} setBet={setBet}/>
-        <ShowuserBalance />
-        </div>
-      </div>
-      </WalletModalProvider>
-      </WalletProvider>
-    </ConnectionProvider>
-  </div>
+   
   
     <div className='flex-1'>
-    <DragonEggGame score={score} setScore={setScore} bet={bet} setBet={setBet} cashout={cashout}/> 
+    {/* <DragonEggGame score={score} setScore={setScore} bet={bet} setBet={setBet} cashout={cashout}/>  */}
+    <FullWallet score={score} setScore={setScore} bet={bet} setBet={setBet} cashout={cashout} setCashout={setCashout}/>
     </div>
     </div>
   );
