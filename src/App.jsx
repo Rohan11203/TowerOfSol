@@ -1,47 +1,6 @@
 import React, { useMemo } from 'react';
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import {
-    WalletModalProvider,
-    WalletDisconnectButton,
-    WalletMultiButton
-} from '@solana/wallet-adapter-react-ui';
-import { clusterApiUrl } from '@solana/web3.js';
 import '@solana/wallet-adapter-react-ui/styles.css';
-import { AirDrop } from './Airdrop';
-import { ShowuserBalance } from './ShowuserBalance';
-// import { SignMessage } from './SignMessage';
-import { SendTokens } from './SendTokens';
-import { Buffer } from 'buffer';
-
-// function App() {
-
-  
-//   return (
-    
-    // <ConnectionProvider endpoint={"https://solana-devnet.g.alchemy.com/v2/VDnQvpyFzMy5QhBaE3WzKup4fib-Qibl"}>
-    //   <WalletProvider wallets={[]} autoConnect>
-    //     <WalletModalProvider> 
-    //     <div>
-    //       <WalletMultiButton />
-    //       <WalletDisconnectButton />
-    //     <AirDrop />
-    //     <ShowuserBalance />
-    //     <SignMessage />
-    //     <SendTokens />
-    //   </div>
-    //   </WalletModalProvider>
-    //   </WalletProvider>
-    // </ConnectionProvider>
-    
-
-//   )
-// }
-
-// export default App
-
 import { useState } from 'react';
-import DragonEggGame from './DragonGame';
 import FullWallet from './FullWallet';
 
 function App() {
@@ -49,15 +8,14 @@ function App() {
   const [bet,setBet] = useState(false);
   const [cashout,setCashout] = useState(false);
   return (
-    <div className="App flex pt-6  space-x-8 bg-blue-900 min-h-screen">
-      
-   
+    
+    <div className='p-4 w-full bg-gradient-to-r from-indigo-800 to-purple-600 border border-purple-600 rounded-lg'>
   
-    <div className='flex-1'>
-    {/* <DragonEggGame score={score} setScore={setScore} bet={bet} setBet={setBet} cashout={cashout}/>  */}
-    <FullWallet score={score} setScore={setScore} bet={bet} setBet={setBet} cashout={cashout} setCashout={setCashout}/>
-    </div>
-    </div>
+  {/* <DragonEggGame score={score} setScore={setScore} bet={bet} setBet={setBet} cashout={cashout}/>  */}
+  <FullWallet score={score} setScore={setScore} bet={bet} setBet={setBet} cashout={cashout} setCashout={setCashout}/>
+</div>
+
+    
   );
 }
 export default App

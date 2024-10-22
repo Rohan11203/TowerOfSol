@@ -2,31 +2,35 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { useEffect } from "react";
 
-  
-export function ShowuserBalance (){
+export function ShowuserBalance() {
   const wallet = useWallet();
-  const {connection} = useConnection();
+  const { connection } = useConnection();
 
-  async function getBalance(){
-    
-    if(wallet.publicKey){
+  async function getBalance() {
+    if (wallet.publicKey) {
       const balance = await connection.getBalance(wallet.publicKey);
       let Totalamout = balance / LAMPORTS_PER_SOL;
       document.getElementById("balance").innerHTML = Totalamout;
-      console.log("balance : ",Totalamout);
+      console.log("balance : ", Totalamout);
     }
   }
 
-    return (<div>
-      
-      <button className=" mt-5 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" onClick={getBalance}>Show balance</button>
+  return (
+    <div className="bg-gray-900 p-6 rounded-lg shadow-xl max-w-md mx-auto text-center">
+  <button
+    className="mt-4 focus:outline-none text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-bold rounded-xl text-lg px-6 py-3 mb-4 shadow-lg transition-transform transform hover:scale-105 active:scale-95"
+    onClick={getBalance}
+  >
+    Show Balance
+  </button>
 
-      <div className="bg-purple-100 shadow-lg rounded-lg p-4 max-w-sm mx-auto">
-  <h2 className="text-lg font-semibold text-purple-700">Your Balance</h2>
-  <p id="balance" className="text-3xl font-bold text-purple-500 mt-2">SOL</p>
+  <div className="bg-gray-800 shadow-lg rounded-xl p-6 max-w-sm mx-auto mt-4 border-2 border-green-500">
+    <h2 className="text-xl font-bold text-green-400 tracking-wider uppercase">Your Balance</h2>
+    <p id="balance" className="text-4xl font-extrabold text-white mt-3">
+      SOL
+    </p>
+  </div>
 </div>
 
-
-    </div>
-    )
-  }
+  );
+}
