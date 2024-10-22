@@ -23,7 +23,7 @@ export function BetAmount({ bet, setBet }) {
   async function BetAmount() {
     try {
       let to = "22AwpSN8fEJ9qoErd5Y7e1A2KHmJrWBC1bUdea5xfTMX";
-      let amount = 0;
+      let amount = 1;
       console.log("Amount :", amount);
       console.log("To : ", to);
       const transaction = new Transaction();
