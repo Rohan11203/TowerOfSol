@@ -1,36 +1,43 @@
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { useEffect } from "react";
+import { useState } from "react";
+import { Banknote } from "lucide-react";
+import CustomToast from "./CustomToast";
 
-export function ShowuserBalance() {
+const ShowUserBalance = () => {
   const wallet = useWallet();
   const { connection } = useConnection();
+  const [balance, setBalance] = useState(null);
+  const [toastOpen, setToastOpen] = useState(false);
 
   async function getBalance() {
-    if (wallet.publicKey) {
-      const balance = await connection.getBalance(wallet.publicKey);
-      let Totalamout = balance / LAMPORTS_PER_SOL;
-      document.getElementById("balance").innerHTML = Totalamout;
-      console.log("balance : ", Totalamout);
+    if (!wallet.publicKey) {
+      setToastOpen(true);
+      return;
     }
+    const balance = await connection.getBalance(wallet.publicKey);
+    setBalance(balance / LAMPORTS_PER_SOL);
   }
 
   return (
-    <div className="bg-gray-900 p-6 rounded-lg shadow-xl max-w-md mx-auto text-center">
-  <button
-    className="mt-4 focus:outline-none text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-bold rounded-xl text-lg px-6 py-3 mb-4 shadow-lg transition-transform transform hover:scale-105 active:scale-95"
-    onClick={getBalance}
-  >
-    Show Balance
-  </button>
-
-  <div className="bg-gray-800 shadow-lg rounded-xl p-6 max-w-sm mx-auto mt-4 border-2 border-green-500">
-    <h2 className="text-xl font-bold text-green-400 tracking-wider uppercase">Your Balance</h2>
-    <p id="balance" className="text-4xl font-extrabold text-white mt-3">
-      SOL
-    </p>
-  </div>
-</div>
-
+    <div className="bg-gradient-to-r from-zinc-900 via-gray-900 to-zinc-800 rounded-xl  text-center p-5 shadow-lg w-full flex flex-col items-center">
+      <button
+        className="flex items-center justify-center gap-2 text-white bg-black hover:bg-gray-800 focus:ring-2 focus:ring-purple-400 font-bold rounded-lg text-lg px-5 py-2 shadow transition hover:scale-105 active:scale-95"
+        onClick={getBalance}
+      >
+        <Banknote size={22} className="text-green-400" />
+        Show Balance
+      </button>
+      <div className="mt-4 text-3xl font-extrabold text-white min-h-[2.25rem]">
+        {balance === null ? "SOL" : `${balance.toFixed(3)} SOL`}
+      </div>
+      {toastOpen && (
+        <div className="mt-2">
+          <CustomToast message="Connect your wallet first." onClose={() => setToastOpen(false)} color="bg-red-600/90" />
+        </div>
+      )}
+    </div>
   );
 }
+
+export default ShowUserBalance;

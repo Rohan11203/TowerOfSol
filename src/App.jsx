@@ -9,7 +9,7 @@ function App() {
   const [cashout,setCashout] = useState(false);
   return (
     
-    <div className='p-4 w-full bg-gradient-to-r from-indigo-800 to-purple-600 border border-purple-600 rounded-lg'>
+    <div className='p-4 w-full min-h-screen bg-black'>
   
   {/* <DragonEggGame score={score} setScore={setScore} bet={bet} setBet={setBet} cashout={cashout}/>  */}
   <FullWallet score={score} setScore={setScore} bet={bet} setBet={setBet} cashout={cashout} setCashout={setCashout}/>

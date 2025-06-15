@@ -1,45 +1,62 @@
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { PiggyBank } from "lucide-react";
 import { useState } from "react";
-import Toast from "./Alert/Alert";
+import CustomToast from "./CustomToast";
 
-export function AirDrop({ score, setCashout, cashout, bet, setBet }) {
+const AirDrop = ({ score, setCashout, bet, setBet }) => {
   const wallet = useWallet();
   const { connection } = useConnection();
-  const [showToastCashout, setShowToastCashout] = useState(false);
-
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   async function sendAirdropToUser() {
+    if (!wallet.publicKey) {
+      setShowError(true);
+      return;
+    }
     try {
       await connection.requestAirdrop(wallet.publicKey, score * LAMPORTS_PER_SOL);
-      setShowToastCashout(true);
+      setShowSuccess(true);
       setCashout(true);
       setBet(false);
-      console.log("Airdrop sent successfully",score);
-      setTimeout(() => {
-        setShowToastCashout(false);
-      }, 3000);
-
+      setTimeout(() => setShowSuccess(false), 3000);
     } catch (error) {
-      alert("Please connect your wallet first");
+      setShowError(true);
     }
   }
 
   return (
-    <div className="text-center">
+    <div className="flex flex-col items-center my-1">
       {bet && (
         <button
-          className="mt-4 mb-6 bg-red-500 text-white px-6 py-4 font-bold rounded-xl transition duration-200 ease-in-out transform hover:bg-red-600 active:scale-95 focus:outline-none focus:ring-4 focus:ring-red-300 shadow-lg"
+          className="flex items-center gap-2 mt-2 bg-red-500 hover:bg-red-400 text-white px-6 py-3 font-bold rounded-2xl transition-transform duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-red-300 shadow-lg text-base"
           onClick={sendAirdropToUser}
         >
-          CashOut
+          <PiggyBank size={22} className="text-yellow-300" />
+          Cash Out ({score} SOL)
         </button>
       )}
-
-      {/* Toast Notification */}
-      {showToastCashout && (
-        <Toast message={`Cashout Successful`} onClose={() => setShowToastCashout(false)} />
+      {showSuccess && (
+        <div className="mt-2">
+          <CustomToast
+            message="Cashout successful! Check your wallet."
+            color="bg-green-600/95"
+            onClose={() => setShowSuccess(false)}
+          />
+        </div>
+      )}
+      {showError && (
+        <div className="mt-2">
+          <CustomToast
+            message="Connect your wallet first."
+            color="bg-red-600/95"
+            onClose={() => setShowError(false)}
+          />
+        </div>
       )}
     </div>
   );
-}
+};
+
+export default AirDrop;
