@@ -10,7 +10,7 @@ import betSound from "./assets/sound.wav";
 import { useState } from "react";
 import CustomToast from "./CustomToast";
 
-const WALLET_TO = "22AwpSN8fEJ9qoErd5Y7e1A2KHmJrWBC1bUdea5xfTMX";
+const WALLET_TO = "3AkwTKtHUu589xecTUJhAyXy7h1NbU9X8FCpeko9dTgp";
 
 const BetAmount = ({ bet, setBet }) => {
   const wallet = useWallet();

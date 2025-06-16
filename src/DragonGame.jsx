@@ -45,7 +45,7 @@ const DragonEggGame = ({
         Array(COLS)
           .fill(null)
           .map(() => ({
-            type: Math.random() < 1 ? "egg" : "bomb",
+            type: Math.random() < 0.7 ? "egg" : "bomb",
             revealed: false,
           }))
       );

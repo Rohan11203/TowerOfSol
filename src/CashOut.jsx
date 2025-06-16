@@ -16,7 +16,13 @@ const AirDrop = ({ score, setCashout, bet, setBet }) => {
       return;
     }
     try {
-      await connection.requestAirdrop(wallet.publicKey, score * LAMPORTS_PER_SOL);
+      const signature = await connection.requestAirdrop(
+        wallet.publicKey,
+        score * LAMPORTS_PER_SOL
+      );
+
+      await connection.confirmTransaction(signature, "confirmed");
+
       setShowSuccess(true);
       setCashout(true);
       setBet(false);
